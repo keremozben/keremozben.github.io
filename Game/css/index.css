@@ -17,74 +17,332 @@
  * under the License.
  */
 * {
-    -webkit-tap-highlight-color: rgba(0,0,0,0); /* make transparent link selection, adjust last value opacity 0 to 1.0 */
-	-webkit-box-sizing:border-box;
-	-moz-box-sizing:border-box;
-	box-sizing:border-box;
-}
+  -webkit-tap-highlight-color: transparent;
+  /* make transparent link selection, adjust last value opacity 0 to 1.0 */
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box; }
 
 /*Reset*/
 html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video, input, select, textarea {
-	margin:0;
-	padding:0;
-	border:0;
-	font-size:100%;
-	font:inherit;
-	vertical-align:top;
-	outline:none;
-}
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: top;
+  outline: none; }
 
-article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {display:block;}
-body {line-height:1;}
-img {display:block;}
-strong{font-weight:bold;}
-a {text-decoration:none;}
-textarea {resize:none;}
-ol, ul {list-style:none;}
-blockquote, q {quotes:none;}
-blockquote:before, blockquote:after, q:before, q:after {content:''; content:none;}
-table {border-collapse:collapse; border-spacing:0;}
-
-/*Clear Fix*/
-.clearfix:after { 
-    visibility:hidden; 
-    display:block; 
-    font-size:0; 
-    content:""; 
-    clear:both; 
-    height:0; 
-}
-* html .clearfix {zoom:1;}
-*:first-child+html .clearfix {zoom:1;}
-
-html, body{height:100%;}
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {
+  display: block; }
 
 body {
-    -webkit-touch-callout: none;                /* prevent callout to copy image, etc when tap to hold */
-    -webkit-text-size-adjust: none;             /* prevent webkit from resizing text to fit */
-    -webkit-user-select: none;                  /* prevent copy paste, to allow, change 'none' to 'text' */
-    background:#E4E4E4;
-    font-family:'HelveticaNeue-Light', 'HelveticaNeue', Helvetica, Arial, sans-serif;
-    font-size:12px;
-    height:100%;
-    margin:0px;
-    padding:0px;
-    text-transform:uppercase;
-    width:100%;
-}
+  line-height: 1; }
 
-#gridHolder{margin:100px auto 0 auto; padding:20px; width:320px;}
+img {
+  display: block; }
 
-.grid{float:left;}
+strong {
+  font-weight: bold; }
 
-.grid.active{border:1px solid #ccc; border-radius:10px; text-align:center; color:#7e7e7e; box-shadow:inset 0 0 5px 1px rgba(0,0,0,0.2); background:#f0f0f0;}
+a {
+  text-decoration: none; }
 
-.grid.active:hover{background:#fff; color:#aaa;}
+textarea {
+  resize: none; }
 
-.grid.active.available{background:#BAFFF7;}
+ol, ul {
+  list-style: none; }
 
-.grid.active.selected{background:#EFCAB8;}
+blockquote, q {
+  quotes: none; }
 
+blockquote:before, blockquote:after, q:before, q:after {
+  content: '';
+  content: none; }
 
+table {
+  border-collapse: collapse;
+  border-spacing: 0; }
 
-.grid.passive{}
+/*Clear Fix*/
+.clearfix:after {
+  visibility: hidden;
+  display: block;
+  font-size: 0;
+  content: "";
+  clear: both;
+  height: 0; }
+
+* html .clearfix {
+  zoom: 1; }
+
+*:first-child + html .clearfix {
+  zoom: 1; }
+
+html, body {
+  height: 100%; }
+
+body {
+  -webkit-touch-callout: none;
+  /* prevent callout to copy image, etc when tap to hold */
+  -webkit-text-size-adjust: none;
+  /* prevent webkit from resizing text to fit */
+  -webkit-user-select: none;
+  /* prevent copy paste, to allow, change 'none' to 'text' */
+  background: #efefef;
+  font-family: 'Oswald', Helvetica, Arial, sans-serif;
+  font-size: 12px;
+  height: 100%;
+  margin: 0px;
+  padding: 0px;
+  width: 100%; }
+
+/**********
+MAIN SCREEN
+**********/
+#logo {
+  width: 277px;
+  height: 254px;
+  background: url(../img/game-logo.png) 0 bottom no-repeat;
+  background-size: 100%;
+  margin: 0 auto 40px auto;
+  text-indent: -9999px; }
+  #logo.size-2 {
+    width: 138px;
+    height: 110px;
+    margin-bottom: 10px; }
+
+.main-buttons {
+  width: 277px;
+  margin: 0 auto; }
+
+.button {
+  display: block;
+  text-indent: -9999px;
+  border-radius: 3px;
+  border: 0 none;
+  cursor: pointer;
+  /*&.mute, &.unmute, &.purchase, &.info{margin:7px;}*/ }
+  .button.play {
+    width: 270px;
+    height: 75px;
+    background: url(../img/icon-play.png) #f38948 center center no-repeat;
+    margin: 0 auto 14px auto;
+    background-size: 10%; }
+  .button.stats {
+    background: url(../img/icon-stats.png) #78b2f3 center center no-repeat;
+    background-size: 50%; }
+  .button.vote {
+    background: url(../img/icon-vote.png) #48f3a1 center center no-repeat;
+    margin: 0 14px;
+    background-size: 50%; }
+  .button.settings {
+    background: url(../img/icon-settings.png) #65625c center center no-repeat;
+    background-size: 50%; }
+  .button.mute, .button.unmute, .button.purchase, .button.info, .button.howto, .button.stats, .button.vote, .button.settings {
+    width: 80px;
+    height: 75px;
+    float: left; }
+  .button.unmute {
+    display: none; }
+  .button.mute {
+    background: url(../img/icon-sound-off.png) #78b2f3 center center no-repeat;
+    background-size: 50%; }
+  .button.unmute {
+    background: url(../img/icon-sound-on.png) #78b2f3 center center no-repeat;
+    background-size: 50%; }
+  .button.purchase {
+    background: url(../img/icon-purchase.png) #48f3a1 center center no-repeat;
+    background-size: 50%;
+    margin: 14px 14px 0 47px; }
+  .button.info {
+    background: url(../img/icon-info.png) #78b2f3 center center no-repeat;
+    background-size: 50%;
+    margin-top: 14px; }
+  .button.howto {
+    background: url(../img/icon-howto.png) #78b2f3 center center no-repeat;
+    background-size: 50%; }
+
+/**********
+LEVEL SCREEN
+**********/
+p {
+  font-size: 30px;
+  color: #564e49;
+  text-align: center;
+  padding-bottom: 15px;
+  font-weight: 300; }
+  p.level-text {
+    font-size: 25px; }
+
+#levels {
+  width: 300px;
+  height: 300px;
+  margin: 0 auto;
+  overflow: hidden;
+  position: relative; }
+
+.level {
+  width: 56px;
+  height: 56px;
+  float: left;
+  margin: 0 4px 4px 0;
+  text-align: center;
+  border-radius: 3px;
+  border: 1px solid #959595;
+  font-size: 30px;
+  color: #564e49;
+  line-height: 52px;
+  cursor: pointer;
+  font-weight: 400;
+  position: relative; }
+  .level:nth-child(5n) {
+    margin-right: 0; }
+  .level.locked {
+    background: url(../img/icon-locked.png) #fff center center no-repeat;
+    background-size: 50%;
+    font-size: 20px;
+    line-height: 70px; }
+  .level.solved {
+    background: #f79353;
+    background: -moz-radial-gradient(center, ellipse cover, #f79353 0%, #e86a2a 100%);
+    background: -webkit-radial-gradient(center, ellipse cover, #f79353 0%, #e86a2a 100%);
+    background: radial-gradient(ellipse at center, #f79353 0%, #e86a2a 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f79353', endColorstr='#e86a2a',GradientType=1 );
+    text-indent: -9999px;
+    border: 0 none; }
+    .level.solved:after {
+      content: "";
+      display: block;
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      background-size: 70% !important; }
+    .level.solved.star-1:after {
+      background: url(../img/icon-star-1.png) center center no-repeat; }
+    .level.solved.star-2:after {
+      background: url(../img/icon-star-2.png) center center no-repeat; }
+    .level.solved.star-3:after {
+      background: url(../img/icon-star-3.png) center center no-repeat; }
+
+/**********
+GAME SCREEN
+**********/
+.app {
+  width: 320px;
+  margin: 0 auto;
+  position: relative; }
+
+#ribbon {
+  width: 100%;
+  height: 140px;
+  background: url(../img/ribbon.png) center center no-repeat;
+  background-size: 190%;
+  padding: 10px 0; }
+
+.undo, .pause {
+  height: 30px;
+  display: block;
+  text-indent: -9999px;
+  background-size: 100% !important;
+  position: absolute;
+  top: 130px; }
+
+.undo {
+  width: 30px;
+  background: url(../img/icon-undo.png) center center no-repeat;
+  left: 10px; }
+
+.pause {
+  width: 26px;
+  background: url(../img/icon-pause.png) center center no-repeat;
+  right: 10px; }
+
+#gridHolder {
+  margin: 0 auto;
+  padding: 10px; }
+
+.grid {
+  width: 56px;
+  height: 56px;
+  float: left;
+  margin: 0 4px 4px 0;
+  text-align: center;
+  border-radius: 3px;
+  font-size: 40px;
+  color: #564e49;
+  line-height: 52px;
+  font-weight: 700;
+  position: relative; }
+  .grid.active {
+    border: 1px solid #959595;
+    cursor: pointer; }
+  .grid.selected {
+    background-color: #fff; }
+  .grid.available:after {
+    width: 90%;
+    height: 90%;
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    background-color: #f38948;
+    content: "";
+    display: block;
+    border-radius: 3px; }
+
+/**********
+POPUPS
+*********/
+.hidden {
+  display: none; }
+
+.badge {
+  width: 228px;
+  height: 280px; }
+  .badge#success {
+    background: url(../img/badge-success.png) center center no-repeat;
+    background-size: 100%; }
+  .badge#fail {
+    background: url(../img/badge-fail.png) center center no-repeat;
+    background-size: 100%; }
+
+#settings {
+  width: 208px;
+  margin: 0 auto;
+  background: #f38948;
+  padding: 10px; }
+
+#info {
+  width: 208px;
+  margin: 0 auto;
+  background: #f38948;
+  padding: 10px; }
+  #info p {
+    font-size: 20px;
+    text-align: center; }
+    #info p a {
+      color: #fff;
+      text-decoration: underline; }
+
+#howto {
+  width: 208px;
+  margin: 0 auto;
+  background: #f38948;
+  padding: 10px; }
+  #howto p {
+    font-size: 20px;
+    text-align: center;
+    color: #fff; }
+  #howto li {
+    font-size: 16px;
+    text-align: left;
+    color: #fff;
+    font-weight: 300;
+    padding-bottom: 10px;
+    list-style: disc;
+    margin-left: 20px; }
+
+/*# sourceMappingURL=index.css.map */

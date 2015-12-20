@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<!--
+    Copyright (c) 2012-2014 Adobe Systems Incorporated. All rights reserved.
+
+    Licensed to the Apache Software Foundation (ASF) under one
+    or more contributor license agreements.  See the NOTICE file
+    distributed with this work for additional information
+    regarding copyright ownership.  The ASF licenses this file
+    to you under the Apache License, Version 2.0 (the
+    "License"); you may not use this file except in compliance
+    with the License.  You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing,
+    software distributed under the License is distributed on an
+    "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+     KIND, either express or implied.  See the License for the
+    specific language governing permissions and limitations
+    under the License.
+-->
+<html>
+<head>
+<meta charset="utf-8" />
+<meta name="format-detection" content="telephone=no" />
+<meta name="msapplication-tap-highlight" content="no" />
+<!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
+<meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+<link href="https://fonts.googleapis.com/css?family=Oswald:400,300,700&subset=latin,latin-ext" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" type="text/css" href="css/fancybox.css" />
+<link rel="stylesheet" type="text/css" href="css/index.css" />
+<title>Fill The Boxes</title>
+<script type="text/javascript" src="cordova.js"></script>
+<script type="text/javascript" src="cordova_plugins.js"></script>
+<script type="text/javascript" src="spec/lib/jquery/jquery.js"></script>
+<script type="text/javascript" src="js/fancybox.js"></script>
+<script type="text/javascript" src="js/functions.js"></script>
+</head>
+<body onload="vote();">
+
+	<div id="logo">KEREM ONLINE</div>
+    
+    <button class="button play" onClick="location.href='./select.html';">Play</button>
+    
+    <div class="clearfix main-buttons">
+        <button class="button howto" onClick="howto();">How to</button>
+        <button class="button vote" onClick="">Vote</button>
+        <!--<button class="button settings" onClick="settings();">Settings</button>-->
+        
+        <button class="button mute" onClick="">Mute</button>
+        <button class="button unmute" onClick="">Unmute</button>
+        <button class="button purchase" onClick="">Purchase</button>
+        <button class="button info" onClick="info();">Info</button>
+	</div>
+    
+    <div class="hidden">
+    	<div id="settings" class="clearfix">
+        	<button class="button mute" onClick="">Mute</button>
+            <button class="button unmute" onClick="">Unmute</button>
+            <button class="button purchase" onClick="">Purchase</button>
+            <button class="button info" onClick="info();">Info</button>
+        </div>
+        <div id="info">
+        	<p>Developed by <a href="mailto:keremozben@gmail.com">Kerem Özben</a></p>
+            <p>Designed by <a href="mailto:">Ertürk Emre Ay</a></p>
+        </div>
+        <div id="howto">
+        	<p>The aim of this game is to fill all the squares starting from 1 to square count. Rules are simple;</p>
+            <ul>
+            	<li>You can start any square you want,</li>
+                <li>To advance, skip 2 squares horizontally or vertically, or skip 1 square diagonally and place next number,</li>
+                <li>Repeat this until you fill all the squares.</li>
+                <li>Be careful! As you go further, it becomes harder to find available squares, think twice before your move!</li>
+            </ul>
+        </div>
+    </div>
+    
+     <audio controls>
+      <source src="sound/background.wav" type="audio/wav">
+    </audio> 
+    
+<script>
+
+function initAds() {
+
+    var admobid = {};
+		// select the right Ad Id according to platform
+		if( /(android)/i.test(navigator.userAgent) ) { 
+			admobid = { // for Android
+				banner: "ca-app-pub-2521389140743564/5648856130"
+			};
+		} else if(/(ipod|iphone|ipad)/i.test(navigator.userAgent)) {
+			admobid = { // for iOS
+				banner: 'ca-app-pub-6869992474017983/4806197152'
+			};
+		} else {
+			admobid = { // for Windows Phone
+				banner: 'ca-app-pub-6869992474017983/8878394753'
+			};
+		}
+		
+		if(AdMob){ 
+			AdMob.createBanner( admobid.banner );
+		} else {
+			registerAdEvents();
+		}
+		
+		registerAdEvents();
+		
+}
+
+function onAdLoaded(e) {
+    if (e.adType === admob.AD_TYPE.INTERSTITIAL) {
+        admob.showInterstitialAd();
+        showNextInterstitial = setTimeout(function() {
+            admob.requestInterstitialAd();
+        }, 2 * 60 * 1000); // 2 minutes
+    }
+}
+
+// optional, in case respond to events
+function registerAdEvents() {
+    document.addEventListener('onAdFailLoad', function(data){ 
+        	alert('error: ' + data.error + 
+        			', reason: ' + data.reason + 
+        			', adNetwork:' + data.adNetwork + 
+        			', adType:' + data.adType + 
+        			', adEvent:' + data.adEvent); // adType: 'banner', 'interstitial', etc.
+        });
+        document.addEventListener('onAdLoaded', function(data){});
+        document.addEventListener('onAdPresent', function(data){});
+        document.addEventListener('onAdLeaveApp', function(data){});
+        document.addEventListener('onAdDismiss', function(data){});
+}
+function onDeviceReady() {
+	
+	app.initialize();
+	
+    document.removeEventListener('deviceready', onDeviceReady, false);
+    initAds();
+	
+    // display a banner at startup
+    admob.createBannerView();
+
+    // request an interstitial
+    admob.requestInterstitialAd();
+}
+</script>
+</body>
+</html>
