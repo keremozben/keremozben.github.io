@@ -244,22 +244,27 @@ GAME SCREEN
   padding: 10px 0; }
 
 .undo, .pause {
-  height: 30px;
+  height: 60px;
   display: block;
-  text-indent: -9999px;
   background-size: 100% !important;
   position: absolute;
-  top: 130px; }
+  top: 110px;
+  cursor: pointer;
+  font-size: 18px;
+  line-height: 60px;
+  color: #564E49;
+  text-align: center; }
 
 .undo {
-  width: 30px;
+  width: 60px;
   background: url(../img/icon-undo.png) center center no-repeat;
   left: 10px; }
 
 .pause {
   width: 26px;
   background: url(../img/icon-pause.png) center center no-repeat;
-  right: 10px; }
+  right: 10px;
+  text-indent: -9999px; }
 
 #gridHolder {
   margin: 0 auto;

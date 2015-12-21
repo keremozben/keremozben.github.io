@@ -186,6 +186,7 @@ function GenerateLevel( _level, _gridMatrix, _locked ){
 			return false; //This Grid Is Unavailable
 		} else {
 			$('.grid[data-x="'+grid[1]+'"][data-y="'+grid[0]+'"]').addClass('selected');
+			music.selectSquare();
 		}
 		
 		$('.grid').removeClass('available');
@@ -284,6 +285,37 @@ function GenerateLevel( _level, _gridMatrix, _locked ){
 			self.fillGrid(grid,self.current);
 		}
 		return temp;
+	}
+	this.undo = function( grid ){
+		$('.grid').removeClass('available');
+		
+		if( grid[0] - 3 < 0 == false && $('.grid[data-x="'+grid[1]+'"][data-y="'+(grid[0]-3)+'"]').text() == "" && $('.grid[data-x="'+grid[1]+'"][data-y="'+(grid[0]-3)+'"]').hasClass('active') ){ //TOP
+			$('.grid[data-x="'+grid[1]+'"][data-y="'+(grid[0]-3)+'"]').addClass('available');
+		}
+		if( grid[1] + 3 > self.gridMatrix[0].length-1 == false && $('.grid[data-x="'+(grid[1]+3)+'"][data-y="'+grid[0]+'"]').text() == "" && $('.grid[data-x="'+(grid[1]+3)+'"][data-y="'+grid[0]+'"]').hasClass('active') ){ //RIGHT
+			$('.grid[data-x="'+(grid[1]+3)+'"][data-y="'+grid[0]+'"]').addClass('available');
+		}
+		if( grid[0] + 3 > self.gridMatrix.length-1 == false && $('.grid[data-x="'+grid[1]+'"][data-y="'+(grid[0]+3)+'"]').text() == "" && $('.grid[data-x="'+grid[1]+'"][data-y="'+(grid[0]+3)+'"]').hasClass('active') ){ //BOTTOM
+			$('.grid[data-x="'+grid[1]+'"][data-y="'+(grid[0]+3)+'"]').addClass('available');
+		}
+		if( grid[1] - 3 < 0 == false && $('.grid[data-x="'+(grid[1]-3)+'"][data-y="'+grid[0]+'"]').text() == "" && $('.grid[data-x="'+(grid[1]-3)+'"][data-y="'+grid[0]+'"]').hasClass('active') ){ //LEFT
+			$('.grid[data-x="'+(grid[1]-3)+'"][data-y="'+grid[0]+'"]').addClass('available');
+		}
+		if( grid[0] - 2 < 0 == false && grid[1] + 2 > self.gridMatrix[0].length-1 == false && $('.grid[data-x="'+(grid[1]+2)+'"][data-y="'+(grid[0]-2)+'"]').text() == "" && $('.grid[data-x="'+(grid[1]+2)+'"][data-y="'+(grid[0]-2)+'"]').hasClass('active') ){ //TOP-RIGHT
+			$('.grid[data-x="'+(grid[1]+2)+'"][data-y="'+(grid[0]-2)+'"]').addClass('available');
+		}
+		if( grid[0] + 2 > self.gridMatrix.length-1 == false && grid[1] + 2 > self.gridMatrix[0].length-1 == false && $('.grid[data-x="'+(grid[1]+2)+'"][data-y="'+(grid[0]+2)+'"]').text() == "" && $('.grid[data-x="'+(grid[1]+2)+'"][data-y="'+(grid[0]+2)+'"]').hasClass('active') ){ //BOTTOM-RIGHT
+			$('.grid[data-x="'+(grid[1]+2)+'"][data-y="'+(grid[0]+2)+'"]').addClass('available');
+		}
+		if( grid[0] + 2 > self.gridMatrix.length-1 == false && grid[1] - 2 < 0 == false && $('.grid[data-x="'+(grid[1]-2)+'"][data-y="'+(grid[0]+2)+'"]').text() == "" && $('.grid[data-x="'+(grid[1]-2)+'"][data-y="'+(grid[0]+2)+'"]').hasClass('active') ){ //BOTTOM-LEFT
+			$('.grid[data-x="'+(grid[1]-2)+'"][data-y="'+(grid[0]+2)+'"]').addClass('available');
+		}
+		if( grid[0] - 2 < 0 == false && grid[1] - 2 < 0 == false && $('.grid[data-x="'+(grid[1]-2)+'"][data-y="'+(grid[0]-2)+'"]').text() == "" && $('.grid[data-x="'+(grid[1]-2)+'"][data-y="'+(grid[0]-2)+'"]').hasClass('active') ){ //TOP-LEFT
+			$('.grid[data-x="'+(grid[1]-2)+'"][data-y="'+(grid[0]-2)+'"]').addClass('available');
+		}
+		
+		self.removeClick();
+		
 	}
 }
 

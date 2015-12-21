@@ -44,22 +44,22 @@
     
     <div class="clearfix main-buttons">
         <button class="button howto" onClick="howto();">How to</button>
-        <button class="button vote" onClick="">Vote</button>
+        <button class="button vote" onClick="vote();">Vote</button>
         <!--<button class="button settings" onClick="settings();">Settings</button>-->
         
-        <button class="button mute" onClick="">Mute</button>
-        <button class="button unmute" onClick="">Unmute</button>
-        <button class="button purchase" onClick="">Purchase</button>
+        <button class="button mute" onClick="mute();">Mute</button>
+        <button class="button unmute" onClick="unmute();">Unmute</button>
+        <button class="button purchase" onClick="purchase();">Purchase</button>
         <button class="button info" onClick="info();">Info</button>
 	</div>
     
     <div class="hidden">
-    	<div id="settings" class="clearfix">
-        	<button class="button mute" onClick="">Mute</button>
-            <button class="button unmute" onClick="">Unmute</button>
+    	<!--<div id="settings" class="clearfix">
+        	<button class="button mute" onClick="mute();">Mute</button>
+            <button class="button unmute" onClick="unmute();">Unmute</button>
             <button class="button purchase" onClick="">Purchase</button>
             <button class="button info" onClick="info();">Info</button>
-        </div>
+        </div>-->
         <div id="info">
         	<p>Developed by <a href="mailto:keremozben@gmail.com">Kerem Özben</a></p>
             <p>Designed by <a href="mailto:">Ertürk Emre Ay</a></p>
@@ -75,8 +75,11 @@
         </div>
     </div>
     
-     <audio controls>
-      <source src="sound/background.wav" type="audio/wav">
+     <audio autoplay loop controls id="sound_background">
+      <source src="sound/background.mp3" type="audio/mp3">
+    </audio> 
+    <audio controls id="sound_square">
+      <source src="sound/select.mp3" type="audio/mp3">
     </audio> 
     
 <script>

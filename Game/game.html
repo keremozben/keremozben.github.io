@@ -43,8 +43,8 @@
         
         <p class="level-text">Level : <span>1</span></p>
         
-        <a class="undo" onClick="">Undo</a>
-        <a class="pause" onClick="">Pause</a>
+        <a class="undo" onClick="undo();">0&infin;</a>
+        <a class="pause" onClick="pause();">Pause</a>
 
     
       <div id="gridHolder" class="clearfix"></div>
@@ -54,6 +54,10 @@
     	<div class="badge" id="success"></div>
         <div class="badge" id="fail"></div>
     </div>
+    
+    <audio controls id="sound_square">
+      <source src="sound/select.mp3" type="audio/mp3">
+    </audio> 
     
 <script>
 
