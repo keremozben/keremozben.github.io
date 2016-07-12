@@ -96,7 +96,7 @@ p{
 				},
 				updateCount : function(){
 					this.touchedBubbleCount++;
-					if( this.touchedBubbleCount < 100 ){
+					if( this.touchedBubbleCount <= 100 ){
 						document.getElementById('count').innerHTML = this.touchedBubbleCount + ' / 100';
 					}
 				},
@@ -143,10 +143,14 @@ p{
 				}
 			}
 		})();
-		/*window.addEventListener("devicemotion", function(){
-			Game.initialize();
-		});*/
-		Game.initialize();
+		
+		if (window.DeviceMotionEvent) {
+		  window.addEventListener('devicemotion', function(){
+				Game.initialize(); 
+		  }, false);
+		} else {
+		  alert("Device Motion Not supported.");
+		}
 	</script>
     
 </body>
