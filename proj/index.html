@@ -96,7 +96,9 @@ p{
 				},
 				updateCount : function(){
 					this.touchedBubbleCount++;
-					document.getElementById('count').innerHTML = this.touchedBubbleCount + ' / 100';
+					if( this.touchedBubbleCount < 100 ){
+						document.getElementById('count').innerHTML = this.touchedBubbleCount + ' / 100';
+					}
 				},
 				createBubble : function(){
 					var bubble = document.createElement('div');
