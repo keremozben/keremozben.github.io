@@ -25,6 +25,11 @@ p{position:absolute; top:50px; padding:10px; color:#fff; font-size:20px; line-he
 	
     <script type="text/javascript" src="shake.js"></script>
     <script type="text/javascript">
+		function shakeEvent () {
+			Game.initialize();
+			window.removeEventListener('shake');
+			shakeEv.stop();
+		}
 		var Game = (function(){
 			var getRand = function(_min, _max){
 				return Math.floor(Math.random() * (_max - _min + 1)) + _min;
@@ -129,10 +134,12 @@ p{position:absolute; top:50px; padding:10px; color:#fff; font-size:20px; line-he
 			}
 		})();
 		
+		var shakeEv = new Shake({
+			threshold: 15,
+			timeout: 1000
+		});
+		shakeEv.start();
 		window.addEventListener('shake', shakeEvent, false);
-		function shakeEvent () {
-			Game.initialize();
-		}
 		
 	</script>
     
