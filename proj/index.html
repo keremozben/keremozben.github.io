@@ -55,6 +55,7 @@ p{
 			        }
 			    }
 			};
+			var t;
 			return {
 				initialize : function(){
 					this.screenWidth = window.innerWidth;
@@ -75,10 +76,10 @@ p{
 				},
 				startBubbles : function(){
 					var bubbleInstances = Math.floor( Math.random() * 2 ) + 1;
-					for( var i = 0; i < bubbleInstances && Game.generatedBubbleCount < Game.bubbleCount; i++){
+					for( var i = 0; i < bubbleInstances; i++){
 						Game.createBubble();
 					}
-					setTimeout(function(){
+					t = setTimeout(function(){
 						Game.startBubbles();
 					},200);
 				},
@@ -90,7 +91,7 @@ p{
 							Game.updateTime();
 						},1000);
 					} else {
-						//stop creating bubbles
+						clearTimeout(t);
 					}
 				},
 				updateCount : function(){
@@ -140,10 +141,10 @@ p{
 				}
 			}
 		})();
-		window.addEventListener("devicemotion", function(){
+		/*window.addEventListener("devicemotion", function(){
 			Game.initialize();
-		});
-		//Game.initialize();
+		});*/
+		Game.initialize();
 	</script>
     
 </body>
