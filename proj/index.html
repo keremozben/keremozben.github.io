@@ -35,7 +35,6 @@ p{
     </div>
 	
     <script type="text/javascript">
-	alert(window.DeviceMotionEvent);
 		var Game = (function(){
 			var getRand = function(_min, _max){
 				return Math.floor(Math.random() * (_max - _min + 1)) + _min;
@@ -141,7 +140,9 @@ p{
 				}
 			}
 		})();
-		window.addEventListener("devicemotion", Game.initialize);
+		window.addEventListener("devicemotion", function(){
+			Game.initialize();
+		});
 		//Game.initialize();
 	</script>
     
