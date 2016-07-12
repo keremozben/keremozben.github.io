@@ -23,6 +23,7 @@ p{position:absolute; top:50px; padding:10px; color:#fff; font-size:20px; line-he
         <p id="count">0 / 100</p>
     </div>
 	
+    <script type="text/javascript" src="shake.js"></script>
     <script type="text/javascript">
 		var Game = (function(){
 			var getRand = function(_min, _max){
@@ -128,7 +129,11 @@ p{position:absolute; top:50px; padding:10px; color:#fff; font-size:20px; line-he
 			}
 		})();
 		
-		Game.initialize();
+		window.addEventListener('shake', shakeEvent, false);
+		function shakeEvent () {
+			Game.initialize();
+		}
+		
 	</script>
     
 </body>
