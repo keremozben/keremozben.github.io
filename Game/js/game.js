@@ -57,12 +57,12 @@ var	stepMoveCount = [];
 function solveAll( level ){
 	for(var _y = 0, Y = level.gridMatrix.length; _y < Y; _y++){
 		for(var _x = 0, X = level.gridMatrix[_y].length; _x < X; _x++){
-			solve( [ _y , _x ], stepMoveCount, level );
+			solve( [ _y , _x ], level );
 		}
 	}
 }
 var availableSolutionCount = [];
-function solve( array, sols, level ){
+function solve( array, level ){
 	var
 		x,
 		grid,
@@ -70,7 +70,8 @@ function solve( array, sols, level ){
 		str,
 		b,
 		grids = $('.grid.active'),
-		n = level.totalAvailableGrid();
+		n = level.totalAvailableGrid(),
+		sols = [];
 	do{
 		if( sols.length == 0 ){
 			grid = array;
@@ -94,6 +95,7 @@ function solve( array, sols, level ){
 				x = level.getAvailableGrids( sols[sols.length-1][0] );
 			} else {
 				console.log('Bitti');
+				//sols = [];
 			}
 		}
 		sols.push( x );
@@ -110,7 +112,7 @@ function solve( array, sols, level ){
 			availableSolutionCount.push( str );
 		}
 		
-	} while (sols.length > 0)
+	} while (sols[0].length > 0)
 }
 
 function GenerateLevel( _level, _gridMatrix, _locked ){
@@ -248,35 +250,35 @@ function GenerateLevel( _level, _gridMatrix, _locked ){
 			return temp;
 		}
 		
-		if( grid[0] - 3 < 0 == false && $('.grid[data-x="'+grid[1]+'"][data-y="'+(grid[0]-3)+'"]').text() == "" ){ //TOP
+		if( grid[0] - 3 < 0 == false && $('.grid[data-x="'+grid[1]+'"][data-y="'+(grid[0]-3)+'"]').text() == "" && $('.grid[data-x="'+grid[1]+'"][data-y="'+(grid[0]-3)+'"]').hasClass('active') ){ //TOP
 			$('.grid[data-x="'+grid[1]+'"][data-y="'+(grid[0]-3)+'"]').addClass('available');
 			temp.push( [ (grid[0]-3), grid[1] ] );
 		}
-		if( grid[1] + 3 > self.gridMatrix[0].length-1 == false && $('.grid[data-x="'+(grid[1]+3)+'"][data-y="'+grid[0]+'"]').text() == "" ){ //RIGHT
+		if( grid[1] + 3 > self.gridMatrix[0].length-1 == false && $('.grid[data-x="'+(grid[1]+3)+'"][data-y="'+grid[0]+'"]').text() == "" && $('.grid[data-x="'+(grid[1]+3)+'"][data-y="'+grid[0]+'"]').hasClass('active') ){ //RIGHT
 			$('.grid[data-x="'+(grid[1]+3)+'"][data-y="'+grid[0]+'"]').addClass('available');
 			temp.push( [ grid[0], (grid[1]+3) ] );
 		}
-		if( grid[0] + 3 > self.gridMatrix.length-1 == false && $('.grid[data-x="'+grid[1]+'"][data-y="'+(grid[0]+3)+'"]').text() == "" ){ //BOTTOM
+		if( grid[0] + 3 > self.gridMatrix.length-1 == false && $('.grid[data-x="'+grid[1]+'"][data-y="'+(grid[0]+3)+'"]').text() == "" && $('.grid[data-x="'+grid[1]+'"][data-y="'+(grid[0]+3)+'"]').hasClass('active') ){ //BOTTOM
 			$('.grid[data-x="'+grid[1]+'"][data-y="'+(grid[0]+3)+'"]').addClass('available');
 			temp.push( [ (grid[0]+3), grid[1] ] );
 		}
-		if( grid[1] - 3 < 0 == false && $('.grid[data-x="'+(grid[1]-3)+'"][data-y="'+grid[0]+'"]').text() == "" ){ //LEFT
+		if( grid[1] - 3 < 0 == false && $('.grid[data-x="'+(grid[1]-3)+'"][data-y="'+grid[0]+'"]').text() == "" && $('.grid[data-x="'+(grid[1]-3)+'"][data-y="'+grid[0]+'"]').hasClass('active') ){ //LEFT
 			$('.grid[data-x="'+(grid[1]-3)+'"][data-y="'+grid[0]+'"]').addClass('available');
 			temp.push( [ grid[0], (grid[1]-3) ] );
 		}
-		if( grid[0] - 2 < 0 == false && grid[1] + 2 > self.gridMatrix[0].length-1 == false && $('.grid[data-x="'+(grid[1]+2)+'"][data-y="'+(grid[0]-2)+'"]').text() == "" ){ //TOP-RIGHT
+		if( grid[0] - 2 < 0 == false && grid[1] + 2 > self.gridMatrix[0].length-1 == false && $('.grid[data-x="'+(grid[1]+2)+'"][data-y="'+(grid[0]-2)+'"]').text() == "" && $('.grid[data-x="'+(grid[1]+2)+'"][data-y="'+(grid[0]-2)+'"]').hasClass('active') ){ //TOP-RIGHT
 			$('.grid[data-x="'+(grid[1]+2)+'"][data-y="'+(grid[0]-2)+'"]').addClass('available');
 			temp.push( [ (grid[0]-2), (grid[1]+2) ] );
 		}
-		if( grid[0] + 2 > self.gridMatrix.length-1 == false && grid[1] + 2 > self.gridMatrix[0].length-1 == false && $('.grid[data-x="'+(grid[1]+2)+'"][data-y="'+(grid[0]+2)+'"]').text() == "" ){ //BOTTOM-RIGHT
+		if( grid[0] + 2 > self.gridMatrix.length-1 == false && grid[1] + 2 > self.gridMatrix[0].length-1 == false && $('.grid[data-x="'+(grid[1]+2)+'"][data-y="'+(grid[0]+2)+'"]').text() == "" && $('.grid[data-x="'+(grid[1]+2)+'"][data-y="'+(grid[0]+2)+'"]').hasClass('active') ){ //BOTTOM-RIGHT
 			$('.grid[data-x="'+(grid[1]+2)+'"][data-y="'+(grid[0]+2)+'"]').addClass('available');
 			temp.push( [ (grid[0]+2), (grid[1]+2) ] );
 		}
-		if( grid[0] + 2 > self.gridMatrix.length-1 == false && grid[1] - 2 < 0 == false && $('.grid[data-x="'+(grid[1]-2)+'"][data-y="'+(grid[0]+2)+'"]').text() == "" ){ //BOTTOM-LEFT
+		if( grid[0] + 2 > self.gridMatrix.length-1 == false && grid[1] - 2 < 0 == false && $('.grid[data-x="'+(grid[1]-2)+'"][data-y="'+(grid[0]+2)+'"]').text() == "" && $('.grid[data-x="'+(grid[1]-2)+'"][data-y="'+(grid[0]+2)+'"]').hasClass('active') ){ //BOTTOM-LEFT
 			$('.grid[data-x="'+(grid[1]-2)+'"][data-y="'+(grid[0]+2)+'"]').addClass('available');
 			temp.push( [ (grid[0]+2), (grid[1]-2) ] );
 		}
-		if( grid[0] - 2 < 0 == false && grid[1] - 2 < 0 == false && $('.grid[data-x="'+(grid[1]-2)+'"][data-y="'+(grid[0]-2)+'"]').text() == "" ){ //TOP-LEFT
+		if( grid[0] - 2 < 0 == false && grid[1] - 2 < 0 == false && $('.grid[data-x="'+(grid[1]-2)+'"][data-y="'+(grid[0]-2)+'"]').text() == "" && $('.grid[data-x="'+(grid[1]-2)+'"][data-y="'+(grid[0]-2)+'"]').hasClass('active') ){ //TOP-LEFT
 			$('.grid[data-x="'+(grid[1]-2)+'"][data-y="'+(grid[0]-2)+'"]').addClass('available');
 			temp.push( [ (grid[0]-2), (grid[1]-2) ] );
 		}
