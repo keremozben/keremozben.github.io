@@ -1,24 +1,4 @@
 <!DOCTYPE html>
-<!--
-    Copyright (c) 2012-2014 Adobe Systems Incorporated. All rights reserved.
-
-    Licensed to the Apache Software Foundation (ASF) under one
-    or more contributor license agreements.  See the NOTICE file
-    distributed with this work for additional information
-    regarding copyright ownership.  The ASF licenses this file
-    to you under the Apache License, Version 2.0 (the
-    "License"); you may not use this file except in compliance
-    with the License.  You may obtain a copy of the License at
-
-    http://www.apache.org/licenses/LICENSE-2.0
-
-    Unless required by applicable law or agreed to in writing,
-    software distributed under the License is distributed on an
-    "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
-     KIND, either express or implied.  See the License for the
-    specific language governing permissions and limitations
-    under the License.
--->
 <html>
 <head>
 <meta charset="utf-8" />
@@ -36,7 +16,7 @@
 <script type="text/javascript" src="js/fancybox.js"></script>
 <script type="text/javascript" src="js/functions.js"></script>
 </head>
-<body onload="vote();">
+<body>
 
 	<div id="logo">KEREM ONLINE</div>
     
@@ -47,8 +27,8 @@
         <button class="button vote" onClick="vote();">Vote</button>
         <!--<button class="button settings" onClick="settings();">Settings</button>-->
         
-        <button class="button mute" onClick="mute();">Mute</button>
-        <button class="button unmute" onClick="unmute();">Unmute</button>
+        <!--<button class="button mute" onClick="mute();">Mute</button>-->
+        <!--<button class="button unmute" onClick="unmute();">Unmute</button>-->
         <button class="button purchase" onClick="purchase();">Purchase</button>
         <button class="button info" onClick="info();">Info</button>
 	</div>
@@ -65,18 +45,15 @@
             <p>Designed by <a href="mailto:">Ertürk Emre Ay</a></p>
         </div>
         <div id="howto">
-        	<p>The aim of this game is to fill all the squares starting from 1 to square count. Rules are simple;</p>
+        	<p>The aim of this game is to fill the squares as many as you can, starting from 1 to square count. Rules are simple;</p>
             <ul>
             	<li>You can start any square you want,</li>
                 <li>To advance, skip 2 squares horizontally or vertically, or skip 1 square diagonally and place next number,</li>
-                <li>Repeat this until you fill all the squares.</li>
+                <li>Repeat this until you have no moves.</li>
                 <li>Be careful! As you go further, it becomes harder to find available squares, think twice before your move!</li>
             </ul>
         </div>
     </div>
-    <audio controls id="sound_square">
-      <source src="sound/select.mp3" type="audio/mp3">
-    </audio> 
     
 <script>
 

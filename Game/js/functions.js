@@ -15,17 +15,13 @@ vote = function(){
 	//AppRate.promptForRating();
 },
 mute = function(){
-	var bg = document.getElementById('sound_background');
 	var square = document.getElementById('sound_square');
-	bg.pause();
 	square.muted = true;
 	$('.mute').hide();
 	$('.unmute').show();
 },
 unmute = function(){
-	var bg = document.getElementById('sound_background');
 	var square = document.getElementById('sound_square');
-	bg.play();
 	square.muted = false;
 	$('.mute').show();
 	$('.unmute').hide();

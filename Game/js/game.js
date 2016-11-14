@@ -1,22 +1,3 @@
-/*
- * Licensed to the Apache Software Foundation (ASF) under one
- * or more contributor license agreements.  See the NOTICE file
- * distributed with this work for additional information
- * regarding copyright ownership.  The ASF licenses this file
- * to you under the Apache License, Version 2.0 (the
- * "License"); you may not use this file except in compliance
- * with the License.  You may obtain a copy of the License at
- *
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing,
- * software distributed under the License is distributed on an
- * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
- * KIND, either express or implied.  See the License for the
- * specific language governing permissions and limitations
- * under the License.
- */
- 
 var LEVEL = location.search.split("=")[1];
  
 var app = {
@@ -115,12 +96,13 @@ function solve( array, level ){
 	} while (sols[0].length > 0)
 }
 
-function GenerateLevel( _level, _gridMatrix, _locked ){
+function GenerateLevel( _level, _gridMatrix, _locked, _stars ){
 	var self = this;
 	this.level = _level;
 	this.gridMatrix = _gridMatrix;
 	this.locked = _locked;
 	this.current = 1;
+	this.stars = _stars;
 	this.gridWidth = function(){
 		return 280 / self.gridMatrix[0].length;
 	}
@@ -147,10 +129,10 @@ function GenerateLevel( _level, _gridMatrix, _locked ){
 		var indexer = 0;
 		for(var i = 0; i < row; i++){
 			for( var j = 0; j < col; j++ ){
-				if( self.gridMatrix[i][j] === 1 ){
+				(function(i,j){
 					$('#gridHolder').append(
 						$('<div />').attr({
-							class : 'grid active'
+							class : 'grid ' + (self.gridMatrix[i][j] === 1 ? 'active' : 'passsive')
 						}).css({
 							width : self.gridWidth(),
 							height : self.gridHeight()
@@ -158,22 +140,12 @@ function GenerateLevel( _level, _gridMatrix, _locked ){
 							'data-x' : j,
 							'data-y' : i
 						}).bind('click',function(){
-							self.findAvailableGrids( [ $(this).data('y'), $(this).data('x') ] );
+							if(self.gridMatrix[i][j] === 1){
+								self.findAvailableGrids( [ $(this).data('y'), $(this).data('x') ] );
+							}
 						})
 					);
-				} else {
-					$('#gridHolder').append(
-						$('<div />').attr({
-							class : 'grid passive'
-						}).css({
-							width : self.gridWidth(),
-							height : self.gridHeight()
-						}).attr({
-							'data-x' : j,
-							'data-y' : i
-						})
-					);
-				}
+				}(i,j))
 			}
 		}
 		$('.level-text span').text( LEVEL );
@@ -221,14 +193,28 @@ function GenerateLevel( _level, _gridMatrix, _locked ){
 		self.fillGrid(grid,self.current);
 		
 	}
+	this.calculateStars = function(number){
+		if( number < this.stars.one.min ){
+			return console.log('Not enough to pass level !');
+		}
+		if(number >= this.stars.one.min && number <= this.stars.one.max){
+			return console.log('One Star !');
+		}
+		if(number >= this.stars.two.min && number <= this.stars.two.max){
+			return console.log('Two Stars !');
+		}
+		if(number >= this.stars.three.min && number <= this.stars.three.max){
+			return console.log('Three Stars !');
+		}
+	}
 	this.fillGrid = function(grid, number){
 		$('.grid[data-x="'+grid[1]+'"][data-y="'+grid[0]+'"]').text(number);
-		if( number == self.totalAvailableGrid() ){
-			win();
+
+		if( $('.grid.available').size() < 1 ){
+			this.calculateStars(number);
+			//There is no available grid after this point, save game status here.
 		}
-		if( $('.grid.available').size() < 1 && number < self.totalAvailableGrid() ){
-			lost();
-		}
+
 		self.current++;
 		self.removeClick();
 	}
