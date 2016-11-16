@@ -1,5 +1,3 @@
-var LEVEL = location.search.split("=")[1];
- 
 var app = {
     // Application Constructor
     initialize: function() {
@@ -21,9 +19,11 @@ var app = {
     },
     // Update DOM on a Received Event
     receivedEvent: function(id) {
-		
+		var LEVEL = location.search.split("=")[1];
 		Levels[LEVEL].createGrid();
-		
+		if(LEVEL == "0"){
+			initTutorial();
+		}
     }
 };
 
@@ -148,7 +148,7 @@ function GenerateLevel( _level, _gridMatrix, _locked, _stars ){
 				}(i,j))
 			}
 		}
-		$('.level-text span').text( LEVEL );
+		$('.level-text span').text( this.level );
 	}
 	this.destroyGrid = function(){
 		$('.grid').unbind('click');

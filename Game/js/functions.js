@@ -51,6 +51,28 @@ undo = function(){
 pause = function(){
 
 },
+checkFirstPlay = function(){
+	if(player.firstPlay){
+		location.href = 'game.html?level=0';
+	} else {
+		location.href = 'select.html'
+	}
+},
+initTutorial = function(){
+	$('.grid.active').eq(0).attr({
+		'data-step' : 1,
+		'data-intro' : 'Start'
+	});
+	$('.grid.active').eq(1).attr({
+		'data-step' : 2,
+		'data-intro' : 'Move'
+	});
+	$('.grid.active').eq(5).attr({
+		'data-step' : 3,
+		'data-intro' : 'Move'
+	});
+	introJs().start();
+},
 music = {
 	selectSquare : function(){
 		var square = document.getElementById('sound_square');
@@ -65,6 +87,7 @@ player = {
 	undoCount : 0,
 	purchasedAny : false,
 	soundMuted : false,
-	voted : false
+	voted : false,
+	firstPlay : true
 }
 
