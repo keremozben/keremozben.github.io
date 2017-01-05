@@ -1,13 +1,17 @@
 var
 
+getCurrentLevel = function(){
+    return Number(location.search.split("=")[1]);
+},
+LEVEL = getCurrentLevel(),
 win = function(){
-	$.fancybox('#success',{margin:0, padding:0, closeBtn:false, helpers : { overlay :{ closeClick : false } }});
+	$.fancybox('#success',{margin:0, padding:0, topRatio:0.1, closeBtn:false, helpers : { overlay :{ closeClick : false } }});
 },
 lost = function(){
-	$.fancybox('#fail',{margin:0, padding:0, closeBtn:false, helpers : { overlay :{ closeClick : false } }});
+	$.fancybox('#fail',{margin:0, padding:0, topRatio:0.1, closeBtn:false, helpers : { overlay :{ closeClick : false } }});
 },
 settings = function(){
-	$.fancybox('#settings',{margin:0, padding:0, closeBtn:false, helpers : { overlay :{ closeClick : false } }});
+	$.fancybox('#settings',{margin:0, padding:0, topRatio:0.1, closeBtn:false, helpers : { overlay :{ closeClick : false } }});
 },
 stats = function(){},
 vote = function(){
@@ -61,17 +65,33 @@ checkFirstPlay = function(){
 initTutorial = function(){
 	$('.grid.active').eq(0).attr({
 		'data-step' : 1,
-		'data-intro' : 'Start'
+		'data-intro' : 'In order to start, touch any square. For this tutorial, touch this one.',
+        'onclick' : "$('.introjs-tooltipbuttons').show()"
 	});
 	$('.grid.active').eq(1).attr({
 		'data-step' : 2,
-		'data-intro' : 'Move'
+		'data-intro' : 'This square is one of many available squares to place your next number. Touch this one too.',
+        'onclick' : "$('.introjs-tooltipbuttons').show()"
 	});
 	$('.grid.active').eq(5).attr({
 		'data-step' : 3,
-		'data-intro' : 'Move'
+		'data-intro' : 'Go on, touch it!',
+        'onclick' : "$('.introjs-tooltipbuttons').show()"
 	});
-	introJs().start();
+    $('.grid.active').eq(4).attr({
+		'data-step' : 4,
+		'data-intro' : 'This is the last hint for this tutorial. You are on your own now.',
+        'onclick' : 'introJs().exit()'
+	});
+	introJs().setOptions({
+        exitOnOverlayClick: false,
+        showBullets:false,
+        hidePrev : true,
+        hideNext : true
+    }).onchange(function(targetElement) {
+      $('.introjs-tooltipbuttons').hide();
+    }).start();
+    $('.introjs-tooltipbuttons').hide();
 },
 music = {
 	selectSquare : function(){
@@ -82,6 +102,10 @@ music = {
 		}
 	}
 },
+goToNextLevel = function(){
+    var cl = getCurrentLevel();
+    location.href = 'game.html?level=' + (cl+1);
+}
 
 player = {
 	undoCount : 0,

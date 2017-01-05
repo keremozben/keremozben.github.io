@@ -195,16 +195,20 @@ function GenerateLevel( _level, _gridMatrix, _locked, _stars ){
 	}
 	this.calculateStars = function(number){
 		if( number < this.stars.one.min ){
-			return console.log('Not enough to pass level !');
+            lost();
+			//return console.log('Not enough to pass level !');
 		}
 		if(number >= this.stars.one.min && number <= this.stars.one.max){
-			return console.log('One Star !');
+            win();
+			//return console.log('One Star !');
 		}
 		if(number >= this.stars.two.min && number <= this.stars.two.max){
-			return console.log('Two Stars !');
+            win();
+			//return console.log('Two Stars !');
 		}
 		if(number >= this.stars.three.min && number <= this.stars.three.max){
-			return console.log('Three Stars !');
+            win();
+			//return console.log('Three Stars !');
 		}
 	}
 	this.fillGrid = function(grid, number){
@@ -212,7 +216,7 @@ function GenerateLevel( _level, _gridMatrix, _locked, _stars ){
 
 		if( $('.grid.available').size() < 1 ){
 			this.calculateStars(number);
-			//There is no available grid after this point, save game status here.
+			//There is no available grid after this point, save game status here and display result.
 		}
 
 		self.current++;

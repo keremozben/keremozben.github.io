@@ -280,6 +280,7 @@ tr.introjs-showElement > th {
   -moz-border-radius: 0.2em 0 0 0.2em;
   border-radius: 0.2em 0 0 0.2em;
   border-right: none;
+    display: none;
 }
 
 .introjs-prevbutton.introjs-fullbutton {
