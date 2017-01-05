@@ -17,20 +17,29 @@ stats = function(){},
 vote = function(){
 	//AppRate.preferences.storeAppURL.android = 'market://details?id=<package_name>';
 	//AppRate.promptForRating();
+    player.voted = true;
+    saveToLocal();
 },
 mute = function(){
 	var square = document.getElementById('sound_square');
 	square.muted = true;
 	$('.mute').hide();
 	$('.unmute').show();
+    player.soundMuted = true;
 },
 unmute = function(){
 	var square = document.getElementById('sound_square');
 	square.muted = false;
 	$('.mute').show();
 	$('.unmute').hide();
+    player.soundMuted = false;
 },
-purchase = function(){},
+purchase = function(){
+    //In-app purchase code here
+    player.purchasedAny = true;
+    player.undoCount = 10;
+    saveToLocal();
+},
 info = function(){
 	$.fancybox('#info',{margin:0, padding:0, closeBtn:true, helpers : { overlay :{ closeClick : false } }});
 },
@@ -90,13 +99,21 @@ initTutorial = function(){
         hideNext : true
     }).onchange(function(targetElement) {
       $('.introjs-tooltipbuttons').hide();
+    }).onexit(function() {
+        player.firstPlay = false;
+        saveToLocal();
+    }).oncomplete(function() {
+        player.firstPlay = false;
+        saveToLocal();
     }).start();
     $('.introjs-tooltipbuttons').hide();
 },
 music = {
 	selectSquare : function(){
 		var square = document.getElementById('sound_square');
-		square.play();
+        if(player.soundMuted === false){
+            square.play();
+        }
 		if(square.ended){
 			square.currentTime = 0;
 		}
@@ -105,9 +122,22 @@ music = {
 goToNextLevel = function(){
     var cl = getCurrentLevel();
     location.href = 'game.html?level=' + (cl+1);
-}
+},
+saveToLocal = function(){
+    if (typeof(Storage) !== "undefined") {
+        localStorage.setItem('userData', JSON.stringify(player));
+    } else {
 
-player = {
+    }
+},
+readFromLocal = function(){
+    if (typeof(Storage) !== "undefined") {
+        return JSON.parse(localStorage.getItem('userData'));
+    } else {
+
+    }
+},
+player = readFromLocal() || {
 	undoCount : 0,
 	purchasedAny : false,
 	soundMuted : false,

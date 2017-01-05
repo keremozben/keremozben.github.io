@@ -27,14 +27,12 @@ var app = {
     }
 };
 
-var Game = {
-	
-	//Bu fonksiyon sadece grid i otomatik cozerken kullaniliyor
-	
-}
-
 var	stepMoveCount = [];
 
+/*
+    @param level : Level {object}
+    @example : solveAll(Levels[3])
+*/
 function solveAll( level ){
 	for(var _y = 0, Y = level.gridMatrix.length; _y < Y; _y++){
 		for(var _x = 0, X = level.gridMatrix[_y].length; _x < X; _x++){
